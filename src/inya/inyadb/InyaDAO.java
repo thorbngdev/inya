@@ -73,4 +73,21 @@ public final class InyaDAO {
         }
         return existAccount;
     }
+    
+    public int getUserPermission(String username) {
+        startDBConnection();
+        int permission = -1;
+        try {            
+            String query = "SELECT * FROM users WHERE user_name = '" + username + "';";
+            PreparedStatement pStm = con.prepareStatement(query);
+            ResultSet queryResult = pStm.executeQuery();
+            queryResult.next();
+            permission = (int) queryResult.getObject("user_permission");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao buscar usuário no banco de dados!");
+        } finally {
+            closeConnection();
+        }
+        return permission;
+    }
 }
