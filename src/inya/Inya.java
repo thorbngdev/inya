@@ -17,7 +17,6 @@ public class Inya {
      */
     public static void main(String[] args) {       
         LoginWindow loginWindow = new LoginWindow();
-        loginWindow.setResizable(false);
         loginWindow.setVisible(true);
         loginWindow.setLocation(640, 360);        
     }

@@ -43,6 +43,7 @@ public class LoginWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         jLabel1.setText("Inya");
@@ -139,6 +140,7 @@ public class LoginWindow extends javax.swing.JFrame {
     private void jButtonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnterActionPerformed
         String username = "";
         String password = "";
+        int permission = 3;
         if(jTextFieldUser.getText().equals("") || jPasswordFieldPass.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Username or Password is empty!", "ERRO", JOptionPane.ERROR_MESSAGE );
         } else {
@@ -146,7 +148,10 @@ public class LoginWindow extends javax.swing.JFrame {
             password = jPasswordFieldPass.getText();
         }
         if(iDAO.getUser(username, password)) {
-            // entra no sistema
+            permission = iDAO.getUserPermission(username);
+            MainWindow newMainWindow = new MainWindow(username, permission);
+            newMainWindow.setVisible(true);
+            this.dispose();
             JOptionPane.showMessageDialog(this, "Welcome, " + username, "Information Message", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Username or Password invalid!", "ERRO", JOptionPane.ERROR_MESSAGE );
@@ -203,11 +208,7 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JTextField jTextFieldUser;
-    private javax.swing.JTextField jTextFieldUsername;
-    private javax.swing.JTextField jTextFieldUsername1;
     // End of variables declaration//GEN-END:variables
 }
